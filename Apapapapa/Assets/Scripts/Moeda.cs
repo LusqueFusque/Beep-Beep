@@ -1,25 +1,33 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Moeda : MonoBehaviour
 {
-    public int velocidadeGiro = 50;
 
+    public int velocidadeGiro = 50;
+    
+    
+    // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            FindObjectOfType<GameManager>().SubtrairMoedas(1);
             Destroy(gameObject);
         }
     }
 
-    private void Update()
+
+    // Update is called once per frame
+    void Update()
     {
-        transform.Rotate(eulers: Vector3.up * velocidadeGiro * Time.deltaTime, relativeTo: Space.World);
+        transform.Rotate(Vector3.up * velocidadeGiro * Time.deltaTime, Space.World);
     }
 }
